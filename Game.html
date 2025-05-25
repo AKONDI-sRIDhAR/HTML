@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spelling Game</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        #game-container {
+            position: relative;
+            width: 400px;
+            height: 600px;
+            background-color: #fff;
+            border: 2px solid #007bff;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+        }
+
+        #character {
+            position: absolute;
+            bottom: 0;
+            left: 180px;
+            width: 40px;
+            height: 40px;
+            background-color: #007bff;
+            border-radius: 50%;
+            transition: left 0.2s ease;
+        }
+
+        .letter {
+            position: absolute;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            background-color: #dc3545;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #sound-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .sound-button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .sound-button:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #word-container {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #control-container {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        #control-container input {
+            margin-right: 10px;
+            padding: 5px;
+            font-size: 16px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        #control-container input:focus {
+            border-color: #0056b3;
+        }
+
+        #control-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            margin-left: 10px;
+        }
+
+        #control-container button:hover {
+            background-color: #218838;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #resume-button, #restart-button, #pause-button {
+            background-color: #17a2b8;
+        }
+
+        #resume-button:hover, #restart-button:hover, #pause-button:hover {
+            background-color: #117a8b;
+        }
+
+        #question-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: none;
+            z-index: 10;
+        }
+
+        #question-box p {
+            margin: 0 0 10px;
+            font-size: 18px;
+        }
+
+        #question-box input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        #question-box input:focus {
+            border-color: #0056b3;
+        }
+
+        #question-box button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #question-box button:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #game-over, #game-win {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 32px;
+            font-weight: bold;
+            display: none;
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+      #intro-image {
+            width: 400px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div id="main-content" style="display:none;">
+    <div id="control-container">
+        <input type="number" id="word-count" min="1" max="10" value="1">
+        <button onclick="startGame()">Start Game</button>
+        <button id="pause-button" onclick="pauseGame()" style="display: none;">Pause</button>
+        <button id="resume-button" onclick="resumeGame()" style="display: none;">Resume</button>
+        <button id="restart-button" onclick="restartGame()" style="display: none;">Restart</button>
+    </div>
+
+    <div id="sound-container"></div>
+    <div id="game-container">
+        <div id="character"></div>
+        <div id="letter-container"></div>
+    </div>
+    <div id="word-container"></div>
+    <div id="question-box">
+        <p id="question-text"></p>
+        <input type="text" id="word-input">
+        <button onclick="submitWord()">Submit</button>
+    </div>
+
+    <div id="game-over">Game Over!</div>
+    <div id="game-win">You Win!</div>
+</div>
+
+    <script>
+setTimeout(() => {
+           document.getElementById('main-content').style.display = 'block';
+        }, 0000);
+        const gameContainer = document.getElementById('game-container');
+        const character = document.getElementById('character');
+        const letterContainer = document.getElementById('letter-container');
+        const wordContainer = document.getElementById('word-container');
+        const soundContainer = document.getElementById('sound-container');
+        const wordCountInput = document.getElementById('word-count');
+        const questionBox = document.getElementById('question-box');
+        const questionText = document.getElementById('question-text');
+        const wordInput = document.getElementById('word-input');
+        const gameOverElement = document.getElementById('game-over');
+        const gameWinElement = document.getElementById('game-win');
+        const resumeButton = document.getElementById('resume-button');
+        const restartButton = document.getElementById('restart-button');
+        const pauseButton = document.getElementById('pause-button');
+
+        let characterPosition = 180;
+        let words = [];
+        let currentWordIndex = 0;
+        let currentWord = "";
+        let letters = [];
+        let gameInterval;
+        let letterInterval;
+        let isPaused = false;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                moveCharacter(-20);
+            } else if (e.key === 'ArrowRight') {
+                moveCharacter(20);
+            }
+        });
+
+        document.addEventListener('touchstart', handleTouchStart, false);
+        document.addEventListener('touchmove', handleTouchMove, false);
+
+        let xDown = null;
+        let yDown = null;
+
+        function handleTouchStart(evt) {
+            const firstTouch = evt.touches[0];                                      
+                        xDown = firstTouch.clientX;                                      
+            yDown = firstTouch.clientY;                                      
+        }
+
+        function handleTouchMove(evt) {
+            if (!xDown || !yDown) {
+                return;
+            }
+
+            const xUp = evt.touches[0].clientX;                                    
+            const yUp = evt.touches[0].clientY;
+
+            const xDiff = xDown - xUp;
+            const yDiff = yDown - yUp;
+
+            if (Math.abs(xDiff) > Math.abs(yDiff)) {
+                if (xDiff > 0) {
+                    moveCharacter(-20);
+                } else {
+                    moveCharacter(20);
+                }                       
+            }
+
+            xDown = null;
+            yDown = null;                                             
+        }
+
+        function moveCharacter(distance) {
+            characterPosition += distance;
+            if (characterPosition < 0) {
+                characterPosition = 0;
+            }
+            if (characterPosition > 360) {
+                characterPosition = 360;
+            }
+            character.style.left = characterPosition + 'px';
+        }
+
+        function createLetter() {
+            const letter = document.createElement('div');
+            letter.classList.add('letter');
+            letter.style.left = Math.floor(Math.random() * 360) + 'px';
+            const remainingLetters = words[currentWordIndex].slice(currentWord.length);
+            letter.textContent = remainingLetters.charAt(Math.floor(Math.random() * remainingLetters.length));
+            letterContainer.appendChild(letter);
+            letters.push(letter);
+        }
+
+        function updateLetters() {
+            letters.forEach(letter => {
+                let letterTop = parseInt(letter.style.top) || 0;
+                letterTop += 10; // Slow down the falling speed
+                letter.style.top = letterTop + 'px';
+
+                if (letterTop >= 560 && letterTop <= 600 && Math.abs(parseInt(letter.style.left) - characterPosition) <= 40) {
+                    if (words[currentWordIndex].charAt(currentWord.length) === letter.textContent) {
+                        currentWord += letter.textContent;
+                        wordContainer.textContent = `${currentWord} (${currentWord.length}/${words[currentWordIndex].length})`;
+                        if (currentWord === words[currentWordIndex]) {
+                            currentWordIndex++;
+                            if (currentWordIndex < words.length) {
+                                currentWord = "";
+                                wordContainer.textContent = currentWord;
+                            } else {
+                                clearInterval(gameInterval);
+                                clearInterval(letterInterval);
+                                showWin();
+                            }
+                        }
+                    } else {
+                        clearInterval(gameInterval);
+                        clearInterval(letterInterval);
+                        showGameOver();
+                    }
+                    letter.remove();
+                    letters = letters.filter(l => l !== letter);
+                } else if (letterTop > 600) {
+                    letter.remove();
+                    letters = letters.filter(l => l !== letter);
+                }
+            });
+        }
+
+        function startGame() {
+            const wordCount = parseInt(wordCountInput.value);
+            words = [];
+            soundContainer.innerHTML = "";
+            askForWords(wordCount, 0);
+            resumeButton.style.display = 'none';
+            restartButton.style.display = 'none';
+            pauseButton.style.display = 'inline-block';
+        }
+
+        function askForWords(wordCount, index) {
+            if (index < wordCount) {
+                questionText.textContent = `Enter word ${index + 1}`;
+                wordInput.value = '';
+                questionBox.style.display = 'block';
+                wordInput.focus();
+                wordInput.onkeypress = function(event) {
+                    if (event.key === 'Enter') {
+                        submitWord();
+                    }
+                };
+            } else {
+                questionBox.style.display = 'none';
+                currentWordIndex = 0;
+                currentWord = "";
+                wordContainer.textContent = currentWord;
+                letters.forEach(letter => letter.remove());
+                letters = [];
+                wordContainer.textContent = `${currentWord} (${currentWord.length}/${words[currentWordIndex].length})`;
+                letterInterval = setInterval(createLetter, 3000); // Add a delay for letter creation
+                gameInterval = setInterval(updateLetters, 50); // Adjusted interval for smoother animation
+            }
+        }
+
+        function submitWord() {
+            const word = wordInput.value.trim();
+            if (word) {
+                words.push(word.toUpperCase());
+                createSoundButton(word, words.length);
+                questionBox.style.display = 'none';
+                askForWords(parseInt(wordCountInput.value), words.length);
+            }
+        }
+
+        function createSoundButton(word, index) {
+            const soundButton = document.createElement('button');
+            soundButton.classList.add('sound-button');
+            soundButton.textContent = `Play Sound ${index}`;
+            soundButton.onclick = () => playSound(word);
+            soundContainer.appendChild(soundButton);
+        }
+
+        function playSound(word) {
+            const msg = new SpeechSynthesisUtterance(word);
+            window.speechSynthesis.speak(msg);
+        }
+
+        function showGameOver() {
+            gameOverElement.style.display = 'block';
+            setTimeout(() => {
+                gameOverElement.style.display = 'none';
+            }, 3000);
+        }
+
+        function showWin() {
+            gameWinElement.style.display = 'block';
+            setTimeout(() => {
+                gameWinElement.style.display = 'none';
+            }, 3000);
+        }
+
+        function pauseGame() {
+            if (!isPaused) {
+                clearInterval(gameInterval);
+                clearInterval(letterInterval);
+                isPaused = true;
+                pauseButton.style.display = 'none';
+                resumeButton.style.display = 'inline-block';
+                restartButton.style.display = 'inline-block';
+            }
+        }
+
+        function resumeGame() {
+            if (isPaused) {
+                letterInterval = setInterval(createLetter, 3000); // Recreate the letter creation interval
+                gameInterval = setInterval(updateLetters, 50); // Recreate the game update interval
+                isPaused = false;
+                pauseButton.style.display = 'inline-block';
+                resumeButton.style.display = 'none';
+                restartButton.style.display = 'none';
+            }
+        }
+
+        function restartGame() {
+            clearInterval(gameInterval);
+            clearInterval(letterInterval);
+            isPaused = false;
+            letterContainer.innerHTML = "";
+            wordContainer.textContent = "";
+            currentWord = "";
+            currentWordIndex = 0;
+            words = [];
+            resumeButton.style.display = 'none';
+            restartButton.style.display = 'none';
+            pauseButton.style.display = 'none';
+            startGame();
+        }
+    </script>
+</body>
+</html>
+

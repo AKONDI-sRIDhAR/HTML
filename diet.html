@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Simple Diet Protein Tracker - Weekly</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  .day {
+    margin-bottom: 10px;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+  }
+  .day-header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .day-content {
+    display: none;
+    padding: 10px;
+    background-color: #e8f5e9;
+  }
+  table {
+    width: 100%;
+  }
+  td {
+    padding: 5px;
+  }
+  .protein-total {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  button {
+    margin-top: 10px;
+    padding: 6px 12px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #d32f2f;
+  }
+  input[type="checkbox"] {
+    cursor: pointer;
+  }
+  .image-container {
+    text-align: center;
+    margin-top: 30px;
+  }
+  .image-container img {
+    max-width: 300px;
+    height: auto;
+  }
+</style>
+</head>
+<body>
+
+<div class="day">
+  <div class="day-header">Monday</div>
+  <div class="day-content">
+    <table>
+      <tr><td><input type="checkbox" data-protein="40" /> Breakfast: Oatmeal (40g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="15" /> Snacks: Peanut Butter Banana Sandwich (15g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="12" /> Lunch: 4 Roti with Sabji (12g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="0" /> Preworkout: Black Coffee (0g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="20" /> Postworkout: Soya Chunks (20g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="15" /> Dinner: 4 Roti with Curd and Sabji (15g)</td></tr>
+    </table>
+    <div class="protein-total">Total protein: 0g</div>
+    <button>Reset</button>
+  </div>
+</div>
+
+<div class="day">
+  <div class="day-header">Tuesday</div>
+  <div class="day-content">
+    <table>
+      <tr><td><input type="checkbox" data-protein="40" /> Breakfast: Oatmeal (40g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="15" /> Snacks: Peanut Butter Banana Sandwich (15g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="12" /> Lunch: 4 Roti with Sabji (12g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="0" /> Preworkout: Black Coffee (0g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="20" /> Postworkout: Soya Chunks (20g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="15" /> Dinner: 4 Roti with Curd and Sabji (15g)</td></tr>
+    </table>
+    <div class="protein-total">Total protein: 0g</div>
+    <button>Reset</button>
+  </div>
+</div>
+
+<div class="day">
+  <div class="day-header">Wednesday</div>
+  <div class="day-content">
+    <table>
+      <tr><td><input type="checkbox" data-protein="40" /> Breakfast: Oatmeal (40g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="15" /> Snacks: Peanut Butter Banana Sandwich (15g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="12" /> Lunch: 4 Roti with Sabji (12g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="0" /> Preworkout: Black Coffee (0g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="20" /> Postworkout: Soya Chunks (20g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="15" /> Dinner: 4 Roti with Paneer Sabji (15g)</td></tr>
+    </table>
+    <div class="protein-total">Total protein: 0g</div>
+    <button>Reset</button>
+  </div>
+</div>
+
+<div class="day">
+  <div class="day-header">Thursday</div>
+  <div class="day-content">
+    <table>
+      <tr><td><input type="checkbox" data-protein="40" /> Breakfast: Oatmeal (40g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="15" /> Snacks: Peanut Butter Banana Sandwich (15g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="12" /> Lunch: 4 Roti with Sabji (12g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="0" /> Preworkout: Black Coffee (0g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="20" /> Postworkout: Soya Chunks (20g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="15" /> Dinner: 4 Roti with Curd and Sabji (15g)</td></tr>
+    </table>
+    <div class="protein-total">Total protein: 0g</div>
+    <button>Reset</button>
+  </div>
+</div>
+
+<div class="day">
+  <div class="day-header">Friday</div>
+  <div class="day-content">
+    <table>
+      <tr><td><input type="checkbox" data-protein="40" /> Breakfast: Oatmeal (40g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="15" /> Snacks: Peanut Butter Banana Sandwich (15g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="12" /> Lunch: 4 Roti with Sabji (12g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="0" /> Preworkout: Black Coffee (0g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="20" /> Postworkout: Soya Chunks (20g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="15" /> Dinner: 4 Roti with Curd and Sabji (15g)</td></tr>
+    </table>
+    <div class="protein-total">Total protein: 0g</div>
+    <button>Reset</button>
+  </div>
+</div>
+
+<div class="day">
+  <div class="day-header">Saturday</div>
+  <div class="day-content">
+    <table>
+      <tr><td><input type="checkbox" data-protein="40" /> Breakfast: Oatmeal (40g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="15" /> Snacks: Peanut Butter Banana Sandwich (15g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="12" /> Lunch: 4 Roti with Sabji (12g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="0" /> Preworkout: Black Coffee (0g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="20" /> Postworkout: Soya Chunks (20g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="15" /> Dinner: 4 Roti with Curd and Sabji (15g)</td></tr>
+    </table>
+    <div class="protein-total">Total protein: 0g</div>
+    <button>Reset</button>
+  </div>
+</div>
+
+<div class="day">
+  <div class="day-header">Sunday</div>
+  <div class="day-content">
+    <table>
+      <tr><td><input type="checkbox" data-protein="40" /> Breakfast: Oatmeal (40g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="15" /> Snacks: Peanut Butter Banana Sandwich (15g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="12" /> Lunch: 4 Roti with Sabji (12g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="0" /> Preworkout: Black Coffee (0g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="20" /> Postworkout: Soya Chunks (20g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="15" /> Dinner: 4 Roti with Paneer Sabji (15g)</td></tr>
+      <tr><td><input type="checkbox" data-protein="35" /> Banana Shake (35g)</td></tr>
+    </table>
+    <div class="protein-total">Total protein: 0g</div>
+    <button>Reset</button>
+  </div>
+</div>
+
+<div class="image-container">
+  <img src="download.png" alt="Project Image" />
+</div>
+<h1 style="text-align: center; font-size: 32px;">
+  <span style="color: black;">⎊</span>
+  <span style="color: green;">s</span>
+  <span style="color: blue;">R</span>
+  <span style="color: blue;">I</span>
+  <span style="color: blue;">D</span>
+  <span style="color: green;">h</span>
+  <span style="color: blue;">A</span>
+  <span style="color: blue;">R</span>
+</h1>
+
+<script>
+  const days = document.querySelectorAll('.day');
+
+  days.forEach(day => {
+    const header = day.querySelector('.day-header');
+    const content = day.querySelector('.day-content');
+    const checkboxes = content.querySelectorAll('input[type="checkbox"]');
+    const totalProteinDiv = content.querySelector('.protein-total');
+    const resetBtn = content.querySelector('button');
+
+    header.addEventListener('click', () => {
+      if (content.style.display === 'block') {
+        content.style.display = 'none';
+      } else {
+        content.style.display = 'block';
+      }
+    });
+
+    function calculateProtein() {
+      let total = 0;
+      checkboxes.forEach(cb => {
+        if (cb.checked) {
+          total += Number(cb.getAttribute('data-protein'));
+        }
+      });
+      totalProteinDiv.textContent = `Total protein: ${total}g`;
+    }
+
+    checkboxes.forEach(cb => {
+      cb.addEventListener('change', calculateProtein);
+    });
+
+    resetBtn.addEventListener('click', () => {
+      checkboxes.forEach(cb => cb.checked = false);
+      calculateProtein();
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gym Workout Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .day {
+      margin-bottom: 10px;
+      border: 1px solid #2196F3;
+      border-radius: 5px;
+    }
+    .day-header {
+      background-color: #2196F3;
+      color: white;
+      padding: 10px;
+      cursor: pointer;
+    }
+    .day-content {
+      display: none;
+      padding: 10px;
+      background-color: #e3f2fd;
+    }
+    table {
+      width: 100%;
+    }
+    td {
+      padding: 5px;
+    }
+    input[type="checkbox"] {
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    .reset-btn {
+      background-color: #f44336;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    .reset-btn:hover {
+      background-color: #d32f2f;
+    }
+    .center-image {
+      text-align: center;
+      margin-top: 40px;
+    }
+    .center-image img {
+      max-width: 90%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+
+<button class="reset-btn" onclick="resetCheckboxes()">Reset All</button>
+
+<div class="day">
+  <div class="day-header">Alternate Days: Abs</div>
+  <div class="day-content">
+    <ul>
+      <li><input type="checkbox"> 10 × Crunches</li>
+      <li><input type="checkbox"> 20 × Feet Taps</li>
+      <li><input type="checkbox"> 10 × V Tucks</li>
+      <li><input type="checkbox"> 20 × Russian Twists</li>
+      <li><input type="checkbox"> 10 × Reverse Crunches</li>
+      <li><input type="checkbox"> × 4 Circuits</li>
+    </ul>
+  </div>
+</div>
+
+<div class="day">
+  <div class="day-header">Monday & Thursday: Chest & Shoulders</div>
+  <div class="day-content">
+    <ul>
+      <li><input type="checkbox"> 3 × Flat Press</li>
+      <li><input type="checkbox"> 3 × Incline Press</li>
+      <li><input type="checkbox"> 3 × Decline Press</li>
+      <li><input type="checkbox"> 2 × Military Press</li>
+      <li><input type="checkbox"> 2 × Front Raises & Lateral Raises</li>
+      <li><input type="checkbox"> 2 × Front & Rear Sit Flys</li>
+      <li><input type="checkbox"> 2 × Traps</li>
+    </ul>
+  </div>
+</div>
+
+<div class="day">
+  <div class="day-header">Tuesday & Friday: Back & Bicep</div>
+  <div class="day-content">
+    <ul>
+      <li><input type="checkbox"> 2 × Lat Pullback</li>
+      <li><input type="checkbox"> 3 × T Bar Row</li>
+      <li><input type="checkbox"> 3 × Barbell Row</li>
+      <li><input type="checkbox"> 2 × Dumbbell Row</li>
+      <li><input type="checkbox"> 2 × Preacher Curls</li>
+      <li><input type="checkbox"> 2 × Dumbbell Preacher Curls</li>
+      <li><input type="checkbox"> 2 × Dumbbell Curls</li>
+      <li><input type="checkbox"> 2 × Spider Curls</li>
+      <li><input type="checkbox"> 2 × Bar Curls</li>
+    </ul>
+  </div>
+</div>
+
+<div class="day">
+  <div class="day-header">Wednesday & Saturday: Legs, Triceps & Forearms</div>
+  <div class="day-content">
+    <ul>
+      <li><input type="checkbox"> 4 × Squats</li>
+      <li><input type="checkbox"> 4 × Tricep Kickbacks</li>
+      <li><input type="checkbox"> 4 × Overhead Press</li>
+      <li><input type="checkbox"> 4 × Weighted Dips</li>
+      <li><input type="checkbox"> 2 × Bar Curls</li>
+      <li><input type="checkbox"> 2 × Farmer Carries</li>
+    </ul>
+  </div>
+</div>
+
+<div class="center-image">
+  <img src="work.jpg" alt="Workout Image">
+</div>
+
+<script>
+  const days = document.querySelectorAll('.day');
+  days.forEach(day => {
+    const header = day.querySelector('.day-header');
+    const content = day.querySelector('.day-content');
+    header.addEventListener('click', () => {
+      content.style.display = content.style.display === 'block' ? 'none' : 'block';
+    });
+  });
+
+  function resetCheckboxes() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(box => box.checked = false);
+  }
+</script>
+
+</body>
+</html>
